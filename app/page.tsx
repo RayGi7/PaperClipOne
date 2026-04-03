@@ -97,7 +97,15 @@ export default function HomePage() {
       const res = await fetch('/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            phone: form.phone,
+            event_date: form.eventDate.slice(0, 10),
+            event_time: form.eventDate.slice(11, 16),
+            event_type: form.eventType,
+            notes: form.notes,
+          }),
       });
 
       if (!res.ok) {
