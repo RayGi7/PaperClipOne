@@ -32,6 +32,9 @@ cp .env.example .env.local
 # 4. Run the dev server
 npm run dev
 # → http://localhost:3000
+
+# 5. Run tests (optional)
+npm test
 ```
 
 ---
@@ -136,7 +139,13 @@ Add these under **Settings → Secrets and variables → Actions** in your GitHu
 │   └── api/
 │       └── bookings/
 │           └── route.ts       # Booking API (Backend Lead)
-├── lib/                       # Shared utilities (db, calendar, email)
+├── lib/
+│   ├── db.ts                  # SQLite setup, schema migration, insert/list helpers
+│   ├── calendar.ts            # Google Calendar event creation (service account)
+│   └── email.ts               # Nodemailer — customer confirmation + DJ notification
+├── __tests__/
+│   ├── api/bookings.test.ts   # Route handler tests (validation, auth, responses)
+│   └── lib/db.test.ts         # DB helper tests
 ├── .env.example               # Environment variable template
 ├── .github/
 │   └── workflows/
